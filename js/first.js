@@ -169,6 +169,7 @@ var menuFunction = function() {
 
 		if(menu.className == "onActive") {
 			target.parentNode.parentNode.className = "child childGet divnone";
+			document.getElementById("lastliID").className = "clearCompleted divnone";
 		}
 
 
@@ -228,6 +229,8 @@ var menuFunction = function() {
 				menu.childNodes[i].className = "child";
 			}
 		}
+
+		document.getElementById("lastliID").className = "clearCompleted divnone";
 	}
 
 //"全部按钮"
@@ -240,6 +243,10 @@ var menuFunction = function() {
  			}
  			if(menu.childNodes[i].className == "child divnone") {
  				menu.childNodes[i].className = "child";
+ 			}
+
+ 			if(menu.childNodes[i].className == "child childGet") {
+ 			    document.getElementById("lastliID").className = "clearCompleted";
  			}
  		}
  	}
@@ -255,6 +262,9 @@ var menuFunction = function() {
  			}
  			if (menu.childNodes[i].className == "child") {
  				menu.childNodes[i].className = "child divnone";
+ 			}
+ 			if(menu.childNodes[i].className == "child childGet") {
+ 			document.getElementById("lastliID").className = "clearCompleted";
  			}
  		}
  	}
@@ -321,7 +331,7 @@ var menuFunction = function() {
 	}
 
 
-//删除已完成事件按钮
+//删除全部已完成事件按钮
 	if(className == "clearCompleted") {
 	 	var getLength = menu.childNodes.length;
 	 	for(var i=0;i<getLength;i++) {
