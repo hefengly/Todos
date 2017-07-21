@@ -113,9 +113,44 @@ li {
 	float: left;
 	margin-left: 15px;
 }
-li a {
-	text-decoration:none;
+
+/*	text-decoration:none;*/
+/*	border: 1px solid #1c1319;*/
+/*	border-radius: 40%;
+    color: #ffa6e6;*/
+/*    color: #ff00b7;*/
+
+/*a:link {color: red}		
+a:visited {color: #ffa6e6;border: 1px solid #1c1319;}	
+a:hover {color: #ff00b7}*/	
+/*a:active {color: green}*/
+button {
+	background-color: white;
+	border: 0px solid #1c1319;
+	color: #ffa6e6;
+	outline:none;
 }
+
+button:hover {
+	color: #ffa6e6;
+}
+
+button:focus {
+	color: #ff00b7;
+	border: 1px solid #1c1319;
+	border-radius: 40%;
+	font-size: 20px;
+}
+
+
+/*.aOnfocus {
+	color: #ff00b7
+	border: 1px solid #1c1319;
+	border-radius: 30%;
+	font-size: 20px;
+}*/
+
+
 .lastLi {
 	margin-left: 50px;
 }
