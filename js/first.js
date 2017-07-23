@@ -42,9 +42,9 @@ var handler = function() {
 		// 	event.preventDefault(event);
 		// }
 		 if(event.keyCode == 13 && target.value != ""){ 
-			if(ifbottom) {
-				menu.removeChild(ifbottom);
-			};
+			// if(ifbottom) {
+			// 	menu.removeChild(ifbottom);
+			// };
         var div = document.createElement("div");
         var span1 = document.createElement("span");
         var input = document.createElement("input");
@@ -62,6 +62,10 @@ var handler = function() {
         span3.className = "removeButton";
         span3.innerHTML = "X";
         div.appendChild(span3);
+        var img = document.createElement("img");
+        img.src = "images/beforeClick.png";
+        img.className = "beforeClick";
+        div.appendChild(img);
         div.className = "child";
 
         	if(menu.className == "onCompleted") {
@@ -70,39 +74,55 @@ var handler = function() {
  			menu.appendChild(div);
 
 
-        //计数器
+  //       //计数器
+  //       var getLength = menu.childNodes.length;
+  //       var number=0;
+  //         for(var i=0;i<getLength;i++) {
+		// 	if(menu.childNodes[i].className == "child" || menu.childNodes[i].className == "child divnone") {
+		// 		document.getElementById("aSId").className = "text2";
+		// 		number++;
+		// 	}
+		// }
+
+
+     //     var buttomDiv = document.createElement("div");
+     //     buttomDiv.className = "bottom";
+     //     buttomDiv.id = "bottomid";
+     //    buttomDiv.innerHTML = '<span class="bottomText">'+
+  			// 	'<strong>'+number+'</strong>'+
+  			// 	'items left'+
+  			// '</span>'+
+  			// '<ul id="ulbottom">'+
+  			// 	'<li>'+
+  			// 		'<button class="All">All</button>'+
+  			// 	'</li>'+
+  			// 	'<li>'+
+  			// 		'<button class="Active">Active</button>'+
+  			// 	'</li>'+
+  			// 	'<li>'+
+  			// 		'<button class="Completed">Completed</button>'+
+  			// 	'</li>'+
+  			// 	'<li class="lastLi">'+
+  			// 		'<button class="clearCompleted divnone" id = "lastliID">clear Completed</button>'+
+  			// 	'</li>'+
+  			// '</ul>';
+  			//  menu.appendChild(buttomDiv);
+
+  			document.getElementById("bottomid").className = "bottom";
+
+  			        //计数器
         var getLength = menu.childNodes.length;
         var number=0;
           for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child" || menu.childNodes[i].className == "child divnone") {
+			if(menu.childNodes[i].className == "child") {
 				document.getElementById("aSId").className = "text2";
 				number++;
 			}
 		}
+		strongSet = document.getElementsByTagName("strong");
+	   	strongSet[0].innerHTML = number;
 
 
-         var buttomDiv = document.createElement("div");
-         buttomDiv.className = "bottom";
-         buttomDiv.id = "bottomid";
-        buttomDiv.innerHTML = '<span class="bottomText">'+
-  				'<strong>'+number+'</strong>'+
-  				'items left'+
-  			'</span>'+
-  			'<ul id="ulbottom">'+
-  				'<li>'+
-  					'<button class="All">All</button>'+
-  				'</li>'+
-  				'<li>'+
-  					'<button class="Active">Active</button>'+
-  				'</li>'+
-  				'<li>'+
-  					'<button class="Completed">Completed</button>'+
-  				'</li>'+
-  				'<li class="lastLi">'+
-  					'<button class="clearCompleted divnone" id = "lastliID">clear Completed</button>'+
-  				'</li>'+
-  			'</ul>';
-  			 menu.appendChild(buttomDiv);
 //取消aS按钮
              document.getElementById("aSId").className = "text2";
 
@@ -129,7 +149,7 @@ var menuFunction = function() {
 //删除按钮
 	if(className == "removeButton") {
 		document.getElementById("lastliID").className = "clearCompleted divnone";
-	   var ifbottom = document.getElementById("bottomid");
+	   // var ifbottom = document.getElementById("bottomid");
 	   menu.removeChild(target.parentNode);
 
         //计数器
@@ -146,7 +166,7 @@ var menuFunction = function() {
 
 
 	   if(number == "0") {
-	   		menu.removeChild(ifbottom);
+	   		document.getElementById("bottomid").className = "bottom divnone";
 	   		document.getElementById("aSId").className = "text2";
 	   }
 //判断取消删除按钮
@@ -345,10 +365,134 @@ var menuFunction = function() {
 	 	}
 		document.getElementById("lastliID").className = "clearCompleted divnone";
 		 document.getElementById("aSId").className = "text2";
+
+
+		        //计数器
+        var getLength = menu.childNodes.length;
+        var number=0;
+          for(var i=0;i<getLength;i++) {
+			if(menu.childNodes[i].className == "child") {
+				document.getElementById("aSId").className = "text2";
+				number++;
+			}
+		}
+		strongSet = document.getElementsByTagName("strong");
+	   	strongSet[0].innerHTML = number;
+
+
+	   if(number == "0") {
+	   		document.getElementById("bottomid").className = "bottom divnone";
+	   		document.getElementById("aSId").className = "text2";
+	   }
 	 }
+
+	 if(target.id != "onContenteditable") {
+	 	if(document.getElementById("onContenteditable")) {
+
+	 		var onContenteditable = document.getElementById("onContenteditable");
+	 		onContenteditable.id = null;
+	 		onContenteditable.setAttribute("contenteditable","false");
+	 	}
+	 }
+
+
+//优先级按钮
+	if(className == "beforeClick") {
+		target.className = "afterClick";
+		target.src = "images/afterClick.png";
+		menu.insertBefore(target.parentNode,menu.childNodes[3]);
+	}
+
+//取消优先级
+	if(className == "afterClick") {
+		target.className = "beforeClick";
+		target.src = "images/beforeClick.png";
+		menu.appendChild(target.parentNode);
+	}
+
 
 
 }
 
 
-EventUtil.addHandler(menu,"click",menuFunction);
+
+
+
+//双击事件
+var menudblFunction = function() {
+	var event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget();
+	var className = target.className;	
+
+    if (className == "childText" || className =="childText get2") {
+    	target.id = "onContenteditable";
+    	target.setAttribute("contenteditable",true);
+
+    	target.focus();
+    }
+
+
+}
+
+
+
+
+EventUtil.addHandler(document,"click",menuFunction);
+EventUtil.addHandler(menu,"dblclick",menudblFunction);
+
+//回车确定完成修改的事件
+
+var keypressonCentent = function() {
+	var event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget();
+	if(event.keyCode == 13) {
+
+//删除修改后空格的节点
+	if(target.id != "text") {
+			if(target.innerHTML == "") {
+		menu.removeChild(target.parentNode);
+
+		        //计数器
+        var getLength = menu.childNodes.length;
+        var number=0;
+          for(var i=0;i<getLength;i++) {
+			if(menu.childNodes[i].className == "child") {
+				document.getElementById("aSId").className = "text2";
+				number++;
+			}
+		}
+		strongSet = document.getElementsByTagName("strong");
+	   	strongSet[0].innerHTML = number;
+	}
+	}
+
+
+
+
+		if(document.getElementById("onContenteditable")) {
+	var onContent = document.getElementById("onContenteditable");
+
+    onContent.id = null;
+	onContent.setAttribute("contenteditable","false");
+	}
+	}
+// //删除修改后空格的节点
+// 	if(target.id != "text") {
+// 			if(target.innerHTML == "") {
+// 		menu.removeChild(target.parentNode);
+
+// 		        //计数器
+//         var getLength = menu.childNodes.length;
+//         var number=0;
+//           for(var i=0;i<getLength;i++) {
+// 			if(menu.childNodes[i].className == "child") {
+// 				document.getElementById("aSId").className = "text2";
+// 				number++;
+// 			}
+// 		}
+// 		strongSet = document.getElementsByTagName("strong");
+// 	   	strongSet[0].innerHTML = number;
+// 	}
+// 	}
+}
+EventUtil.addHandler(menu,"keypress",keypressonCentent);
