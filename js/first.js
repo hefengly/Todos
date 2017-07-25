@@ -111,16 +111,7 @@ var handler = function() {
   			document.getElementById("bottomid").className = "bottom";
 
   			        //计数器
-        var getLength = menu.childNodes.length;
-        var number=0;
-          for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child") {
-				document.getElementById("aSId").className = "text2";
-				number++;
-			}
-		}
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = number;
+numbertest();
 
 
 //取消aS按钮
@@ -153,17 +144,14 @@ var menuFunction = function() {
 	   menu.removeChild(target.parentNode);
 
         //计数器
-        var getLength = menu.childNodes.length;
-        var number=0;
+       numbertest();
+       var getLength = menu.childNodes.length;
+       var number=0;
           for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child") {
-				document.getElementById("aSId").className = "text2";
+			if(menu.childNodes[i].className == "child"||menu.childNodes[i].className == "child divnone"||menu.childNodes[i].className == "child childGet divnone"||menu.childNodes[i].className == "child childGet") {
 				number++;
 			}
 		}
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = number;
-
 
 	   if(number == "0") {
 	   		document.getElementById("bottomid").className = "bottom divnone";
@@ -292,11 +280,14 @@ var menuFunction = function() {
 
 //全选按钮
 	if(className =='text2') {
+
 		document.getElementById("lastliID").className = "clearCompleted";
-		target.className = "text2 get"
+		target.className = "text2 get";
 		var getLength = menu.childNodes.length;
+
 		for(var i=0;i<getLength;i++) {
-			if (menu.childNodes[i].className == "child") {
+
+			if (menu.childNodes[i].className == "child"||menu.childNodes[i].className == "child divnone" ){
 				var childgetLength= menu.childNodes[i].childNodes.length;
 					for(var j=0;j<childgetLength;j++) {
 						if(menu.childNodes[i].childNodes[j].className =="getsParent") {
@@ -306,13 +297,41 @@ var menuFunction = function() {
 							menu.childNodes[i].childNodes[j].className = "childText get2";
 						}
 					}
-				menu.childNodes[i].className = "child childGet";
-			}			
+
+				if(menu.childNodes[i].className == "child")	 {
+					menu.childNodes[i].className = "child childGet";
+				}
+			
+				if(menu.childNodes[i].className == "child divnone") {
+					menu.childNodes[i].className = "child childGet divnone";
+				}
+
+			
 		}
 
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = "0";
 	}
+		if(menu.className == "onCompleted") {
+			var getLength = menu.childNodes.length;
+			for(var i=0;i<getLength;i++) {
+				if(menu.childNodes[i].className == "child childGet divnone") {
+					menu.childNodes[i].className = "child childGet";
+				}
+			}
+		}
+
+		if(menu.className == "onActive") {
+			var getLength = menu.childNodes.length;
+				for(var i=0;i<getLength;i++) {
+				if(menu.childNodes[i].className == "child childGet") {
+					menu.childNodes[i].className = "child childGet divnone";
+				}
+			}
+		}
+
+		numbertest();
+		// strongSet = document.getElementsByTagName("strong");
+	 //   	strongSet[0].innerHTML = "0";
+}
 
 
 
@@ -336,23 +355,22 @@ var menuFunction = function() {
 			}			
 		}
 
-
-		        //计数器
-        var getLength = menu.childNodes.length;
-        var number=0;
-          for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child") {
-				document.getElementById("aSId").className = "text2";
-				number++;
+		if(menu.className == "onCompleted") {
+			var getLength = menu.childNodes.length;
+			for(var i=0;i<getLength;i++) {
+				if(menu.childNodes[i].className == "child") {
+					menu.childNodes[i].className = "child divnone";
+				}
 			}
 		}
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = number;
-	}
 
+		        //计数器
+numbertest();
+	}
+	
 
 //删除全部已完成事件按钮
-	if(className == "clearCompleted") {
+		if(className == "clearCompleted") {
 	 	var getLength = menu.childNodes.length;
 	 	for(var i=0;i<getLength;i++) {
 	 		if(menu.childNodes[i] != undefined){
@@ -368,16 +386,7 @@ var menuFunction = function() {
 
 
 		        //计数器
-        var getLength = menu.childNodes.length;
-        var number=0;
-          for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child") {
-				document.getElementById("aSId").className = "text2";
-				number++;
-			}
-		}
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = number;
+		        	numbertest();
 
 
 	   if(number == "0") {
@@ -385,6 +394,11 @@ var menuFunction = function() {
 	   		document.getElementById("aSId").className = "text2";
 	   }
 	 }
+
+
+
+
+
 
 	 if(target.id != "onContenteditable") {
 	 	if(document.getElementById("onContenteditable")) {
@@ -451,18 +465,7 @@ var keypressonCentent = function() {
 	if(target.id != "text") {
 			if(target.innerHTML == "") {
 		menu.removeChild(target.parentNode);
-
-		        //计数器
-        var getLength = menu.childNodes.length;
-        var number=0;
-          for(var i=0;i<getLength;i++) {
-			if(menu.childNodes[i].className == "child") {
-				document.getElementById("aSId").className = "text2";
-				number++;
-			}
-		}
-		strongSet = document.getElementsByTagName("strong");
-	   	strongSet[0].innerHTML = number;
+	 numbertest()
 	}
 	}
 
@@ -496,3 +499,20 @@ var keypressonCentent = function() {
 // 	}
 }
 EventUtil.addHandler(menu,"keypress",keypressonCentent);
+
+
+
+ //计数器
+ var numbertest = function() {
+			        //计数器
+        var getLength = menu.childNodes.length;
+        var number=0;
+          for(var i=0;i<getLength;i++) {
+			if(menu.childNodes[i].className == "child"||menu.childNodes[i].className == "child divnone") {
+				document.getElementById("aSId").className = "text2";
+				number++;
+			}
+		}
+		strongSet = document.getElementsByTagName("strong");
+	   	strongSet[0].innerHTML = number;
+}

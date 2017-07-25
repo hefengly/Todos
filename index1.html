@@ -2,61 +2,39 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>todos</title>
-	<link rel="stylesheet" type="text/css" href="css/first.css">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/second.css">
 </head>
 <body>
-	<div class="main">
-		<div class="todos">todos</div>
+	<div class="top">
+		<img src="images/login.png">
+		<p>login to Todos</p>
 	</div>
-	<div id="menu">
-		<div class="top">
-			<span>
-				<input class="text2" id ="aSId" type="button" value = "aS">
-			</span>
-			<span>
-				<input class="text" id="text" type="text" placeholder="What needs to be done" autofocus>
-			</span>
+	<div class="main" id="mainId">
+		<div class="username">
+			<p>Username</p>
+			<input class="userinput" type="text" placeholder="和风" id="usernameId">
 		</div>
+		<div class="password">
+			<p>Password</p>
+			<input class="passwordinput" type="password" placeholder="***" id="passwordId">
+		</div>
+		<div class="Security divnone" id="SecurityId">
+			<p>Security Question</p>
+			<input class="Questioninput" type="text" placeholder="Who is my best friend?" id="QuestionId">
+			<p>Security Answer</p>
+			<input class="Answerinput" type="text" placeholder="He is ..." id="AnswerId">
+		</div>
+		<button class="signIn" id="signInId">Sign in</button>
+		<button class="Register divnone" id="RegisterId">Register</button>
+	</div>
+	<div class="Creat" id="CreatId">
+		<p>New to Todos?<button id="CreatAccount">Creat an account</button></p>
+	</div>
 
-<!--   		<div class= "child childGet">
-  			<span class="getsParent">
-				<input class="text3" type="button" value = "get">
-			</span>
-			<span class="childText">
-					dddddddddddd；
-			</span>
-		
-			<span class="removeButton">
-				X
-			</span>
-			<img src="images/beforeClick.png">
-  		</div>  -->
 
-	</div>	
 
-	
-  		<div class= "bottom divnone" id="bottomid">
-  			<span class="bottomText">
-  				<strong>0</strong>
-  				items left
-  			</span>
-  			<ul id="ulbottom">
-  				<li>
-  					<button class="All">All</button>
-  				</li>
-  				<li>
-  					<button class="Active">Active</button>
-  				</li>
-  				<li>
-  					<button class="Completed">Completed</button>
-  				</li>
-  				<li class="lastLi">
-  					<button class="clearCompleted divnone" id = "lastliID">clear Completed</button>
-  				</li>
-  			</ul>
-  		</div>
-	
-	<script type="text/javascript" src="js/first.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/second.js"></script>
 </body>
 </html>
