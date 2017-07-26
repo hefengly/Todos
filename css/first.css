@@ -14,7 +14,7 @@ body {
 
 .todos {
 	text-align:center;
-	width: 300px;
+/*	width: 300px;*/
 	height: 120px;
 	margin: 0 auto;
 	font-size: 100px;
@@ -94,7 +94,7 @@ body {
 
 }
 
-img {
+.mainImg {
 /*	position: relative;
 	left: 40px;*/
 /*	display: inline;*/
@@ -136,18 +136,59 @@ li {
 a:visited {color: #ffa6e6;border: 1px solid #1c1319;}	
 a:hover {color: #ff00b7}*/	
 /*a:active {color: green}*/
-button {
+
+
+
+
+
+.All {
 	background-color: white;
 	border: 0px solid #1c1319;
 	color: #ffa6e6;
 	outline:none;
 }
 
-button:hover {
+.All:hover {
 	color: #ffa6e6;
 }
 
-button:focus {
+.All:focus {
+	color: #ff00b7;
+	border: 1px solid #1c1319;
+	border-radius: 40%;
+	font-size: 20px;
+}
+
+.Active {
+	background-color: white;
+	border: 0px solid #1c1319;
+	color: #ffa6e6;
+	outline:none;
+}
+
+.Active:hover {
+	color: #ffa6e6;
+}
+
+.Active:focus {
+	color: #ff00b7;
+	border: 1px solid #1c1319;
+	border-radius: 40%;
+	font-size: 20px;
+}
+
+.Completed {
+	background-color: white;
+	border: 0px solid #1c1319;
+	color: #ffa6e6;
+	outline:none;
+}
+
+.Completed:hover {
+	color: #ffa6e6;
+}
+
+.Completed:focus {
 	color: #ff00b7;
 	border: 1px solid #1c1319;
 	border-radius: 40%;
@@ -155,12 +196,34 @@ button:focus {
 }
 
 
+#lastliID {
+	background-color: white;
+	border: 0px solid #1c1319;
+	color: #ffa6e6;
+	outline:none;
+}
+
+#lastliID:hover {
+	color: #ffa6e6;
+}
+
+#lastliID:focus {
+	color: #ff00b7;
+	border: 1px solid #1c1319;
+	border-radius: 40%;
+	font-size: 20px;
+}
 /*.aOnfocus {
 	color: #ff00b7
 	border: 1px solid #1c1319;
 	border-radius: 30%;
 	font-size: 20px;
 }*/
+
+
+
+
+
 
 
 .lastLi {

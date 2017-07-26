@@ -31,20 +31,16 @@ var EventUtil = {
 
 var text = document.getElementById("text");
 
+var key = function() {
+
 //添加事件
 var handler = function() {
 	var menu = document.getElementById("menu");
 	var ifbottom = document.getElementById("bottomid");
 	var event = EventUtil.getEvent(event);
 	var target = EventUtil.getTarget();
-
-		// if (target.value == "") {
-		// 	event.preventDefault(event);
-		// }
+	if(target.className == "text") {
 		 if(event.keyCode == 13 && target.value != ""){ 
-			// if(ifbottom) {
-			// 	menu.removeChild(ifbottom);
-			// };
         var div = document.createElement("div");
         var span1 = document.createElement("span");
         var input = document.createElement("input");
@@ -64,7 +60,7 @@ var handler = function() {
         div.appendChild(span3);
         var img = document.createElement("img");
         img.src = "images/beforeClick.png";
-        img.className = "beforeClick";
+        img.className = "mainImg beforeClick";
         div.appendChild(img);
         div.className = "child";
 
@@ -72,61 +68,65 @@ var handler = function() {
         		div.className = "child divnone";
         	}
  			menu.appendChild(div);
-
-
-  //       //计数器
-  //       var getLength = menu.childNodes.length;
-  //       var number=0;
-  //         for(var i=0;i<getLength;i++) {
-		// 	if(menu.childNodes[i].className == "child" || menu.childNodes[i].className == "child divnone") {
-		// 		document.getElementById("aSId").className = "text2";
-		// 		number++;
-		// 	}
-		// }
-
-
-     //     var buttomDiv = document.createElement("div");
-     //     buttomDiv.className = "bottom";
-     //     buttomDiv.id = "bottomid";
-     //    buttomDiv.innerHTML = '<span class="bottomText">'+
-  			// 	'<strong>'+number+'</strong>'+
-  			// 	'items left'+
-  			// '</span>'+
-  			// '<ul id="ulbottom">'+
-  			// 	'<li>'+
-  			// 		'<button class="All">All</button>'+
-  			// 	'</li>'+
-  			// 	'<li>'+
-  			// 		'<button class="Active">Active</button>'+
-  			// 	'</li>'+
-  			// 	'<li>'+
-  			// 		'<button class="Completed">Completed</button>'+
-  			// 	'</li>'+
-  			// 	'<li class="lastLi">'+
-  			// 		'<button class="clearCompleted divnone" id = "lastliID">clear Completed</button>'+
-  			// 	'</li>'+
-  			// '</ul>';
-  			//  menu.appendChild(buttomDiv);
-
   			document.getElementById("bottomid").className = "bottom";
 
   			        //计数器
-numbertest();
-
+       numbertest();
 
 //取消aS按钮
-             document.getElementById("aSId").className = "text2";
-
+        document.getElementById("aSId").className = "text2";
         target.value = "";
         event.preventDefault(event);
 
-  }    
+  } 
+
+
+
+          var getLength = menu.childNodes.length;
+        var number=0;
+          for(var i=0;i<getLength;i++) {
+			if(menu.childNodes[i].className == "child"||menu.childNodes[i].className == "child divnone") {
+				document.getElementById("aSId").className = "text2";
+				number++;
+			}
+		}
+		strongSet = document.getElementsByTagName("strong");
+	   	strongSet[0].innerHTML = number;
+	   	   ChangeSave();
+}
+
+if(target.className == "childText") {
+	var event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget();
+	if(event.keyCode == 13) {
+
+//删除修改后空格的节点
+	if(target.id != "text") {
+			if(target.innerHTML == "") {
+		menu.removeChild(target.parentNode);
+		numbertest();
+	}
+	}
+
+
+
+
+		if(document.getElementById("onContenteditable")) {
+	var onContent = document.getElementById("onContenteditable");
+
+    onContent.id = null;
+	onContent.setAttribute("contenteditable","false");
+	}
+	}
+	   ChangeSave();
+} 
+	
 };
 
-EventUtil.addHandler(text,"keypress",handler);
+EventUtil.addHandler(document,"keypress",handler);
 
 
-
+}
 
 var menu = document.getElementById("menu");
 
@@ -139,8 +139,10 @@ var menuFunction = function() {
 
 //删除按钮
 	if(className == "removeButton") {
+		var menu = document.getElementById("menu");
 		document.getElementById("lastliID").className = "clearCompleted divnone";
 	   // var ifbottom = document.getElementById("bottomid");
+	   // alert(target.parentNode.className)
 	   menu.removeChild(target.parentNode);
 
         //计数器
@@ -164,10 +166,12 @@ var menuFunction = function() {
 				document.getElementById("lastliID").className = "clearCompleted";
 			}
 		}
+		   ChangeSave();
 	}
 
 //完成事件按钮
 	if(className == "text3") {
+		var menu = document.getElementById("menu");
 		var number = 0;
 		document.getElementById("lastliID").className = "clearCompleted";
 		document.getElementById("aSId").className = "text2 get";
@@ -191,10 +195,12 @@ var menuFunction = function() {
 		}
 		strongSet = document.getElementsByTagName("strong");
 	   	strongSet[0].innerHTML = number;
+	   	   ChangeSave();
 	}
 
 //取消完成事件按钮
 	if(className == "text3 get") {
+		var menu = document.getElementById("menu");
 		var number = 0;
 		document.getElementById("lastliID").className = "clearCompleted divnone";
 		target.className = "text3";
@@ -222,11 +228,13 @@ var menuFunction = function() {
 
 		strongSet = document.getElementsByTagName("strong");
 	   	strongSet[0].innerHTML = number;
+	   	   ChangeSave();
 	}
 
 
 //未完成按钮
 	if(className == "Active") {
+		var menu = document.getElementById("menu");
 		menu.className = "onActive";
 		var getLength = menu.childNodes.length;
 		for(var i = 0;i<getLength;i++) {
@@ -239,10 +247,12 @@ var menuFunction = function() {
 		}
 
 		document.getElementById("lastliID").className = "clearCompleted divnone";
+		   ChangeSave();
 	}
 
 //"全部按钮"
  	if(className =="All") {
+ 		var menu = document.getElementById("menu");
  		menu.className = "onAll";
  		var getLength = menu.childNodes.length;
  		for(var i = 0;i<getLength;i++) {
@@ -257,11 +267,13 @@ var menuFunction = function() {
  			    document.getElementById("lastliID").className = "clearCompleted";
  			}
  		}
+ 		   ChangeSave();
  	}
 
 
  //已完成的事件按钮
  	if(className == "Completed") {
+ 		var menu = document.getElementById("menu");
  		menu.className = "onCompleted";
  		var getLength = menu.childNodes.length;
  		for(var i = 0;i<getLength;i++) {
@@ -275,12 +287,13 @@ var menuFunction = function() {
  			document.getElementById("lastliID").className = "clearCompleted";
  			}
  		}
+ 		   ChangeSave();
  	}
 
 
 //全选按钮
 	if(className =='text2') {
-
+		var menu = document.getElementById("menu");
 		document.getElementById("lastliID").className = "clearCompleted";
 		target.className = "text2 get";
 		var getLength = menu.childNodes.length;
@@ -329,6 +342,7 @@ var menuFunction = function() {
 		}
 
 		numbertest();
+		   ChangeSave();
 		// strongSet = document.getElementsByTagName("strong");
 	 //   	strongSet[0].innerHTML = "0";
 }
@@ -337,6 +351,9 @@ var menuFunction = function() {
 
 
 	if(className =="text2 get") {
+		var menu = document.getElementById("menu");
+		var event = EventUtil.getEvent(event);
+		var target = EventUtil.getTarget();
 		target.className = "text2";
 		var getLength = menu.childNodes.length;
 		document.getElementById("lastliID").className = "clearCompleted divnone";
@@ -364,13 +381,15 @@ var menuFunction = function() {
 			}
 		}
 
-		        //计数器
+		        // 计数器
 numbertest();
+   ChangeSave();
 	}
 	
 
 //删除全部已完成事件按钮
 		if(className == "clearCompleted") {
+			var menu = document.getElementById("menu");
 	 	var getLength = menu.childNodes.length;
 	 	for(var i=0;i<getLength;i++) {
 	 		if(menu.childNodes[i] != undefined){
@@ -393,6 +412,7 @@ numbertest();
 	   		document.getElementById("bottomid").className = "bottom divnone";
 	   		document.getElementById("aSId").className = "text2";
 	   }
+	      ChangeSave();
 	 }
 
 
@@ -411,21 +431,22 @@ numbertest();
 
 
 //优先级按钮
-	if(className == "beforeClick") {
-		target.className = "afterClick";
+	if(className == "mainImg beforeClick") {
+		var menu = document.getElementById("menu");
+		target.className = "mainImg afterClick";
 		target.src = "images/afterClick.png";
 		menu.insertBefore(target.parentNode,menu.childNodes[3]);
+		   ChangeSave();
 	}
 
 //取消优先级
-	if(className == "afterClick") {
-		target.className = "beforeClick";
+	if(className == "mainImg afterClick") {
+		var menu = document.getElementById("menu");
+		target.className = "mainImg beforeClick";
 		target.src = "images/beforeClick.png";
 		menu.appendChild(target.parentNode);
+		ChangeSave();
 	}
-
-
-
 }
 
 
@@ -443,68 +464,49 @@ var menudblFunction = function() {
     	target.setAttribute("contenteditable",true);
 
     	target.focus();
+    	    ChangeSave();
     }
-
-
 }
 
 
 
 
 EventUtil.addHandler(document,"click",menuFunction);
-EventUtil.addHandler(menu,"dblclick",menudblFunction);
+EventUtil.addHandler(document,"dblclick",menudblFunction);
 
 //回车确定完成修改的事件
 
-var keypressonCentent = function() {
-	var event = EventUtil.getEvent(event);
-	var target = EventUtil.getTarget();
-	if(event.keyCode == 13) {
+// var keypressonCentent = function() {
+// 	var event = EventUtil.getEvent(event);
+// 	var target = EventUtil.getTarget();
+// 	if(event.keyCode == 13) {
 
-//删除修改后空格的节点
-	if(target.id != "text") {
-			if(target.innerHTML == "") {
-		menu.removeChild(target.parentNode);
-	 numbertest()
-	}
-	}
-
-
-
-
-		if(document.getElementById("onContenteditable")) {
-	var onContent = document.getElementById("onContenteditable");
-
-    onContent.id = null;
-	onContent.setAttribute("contenteditable","false");
-	}
-	}
 // //删除修改后空格的节点
 // 	if(target.id != "text") {
 // 			if(target.innerHTML == "") {
 // 		menu.removeChild(target.parentNode);
+// 		numbertest();
+// 	}
+// 	}
 
-// 		        //计数器
-//         var getLength = menu.childNodes.length;
-//         var number=0;
-//           for(var i=0;i<getLength;i++) {
-// 			if(menu.childNodes[i].className == "child") {
-// 				document.getElementById("aSId").className = "text2";
-// 				number++;
-// 			}
-// 		}
-// 		strongSet = document.getElementsByTagName("strong");
-// 	   	strongSet[0].innerHTML = number;
+
+
+
+// 		if(document.getElementById("onContenteditable")) {
+// 	var onContent = document.getElementById("onContenteditable");
+
+//     onContent.id = null;
+// 	onContent.setAttribute("contenteditable","false");
 // 	}
 // 	}
-}
-EventUtil.addHandler(menu,"keypress",keypressonCentent);
+// }
+// EventUtil.addHandler(menu,"keypress",keypressonCentent);
 
 
 
  //计数器
  var numbertest = function() {
-			        //计数器
+		var menu = document.getElementById("menu");
         var getLength = menu.childNodes.length;
         var number=0;
           for(var i=0;i<getLength;i++) {
@@ -516,3 +518,23 @@ EventUtil.addHandler(menu,"keypress",keypressonCentent);
 		strongSet = document.getElementsByTagName("strong");
 	   	strongSet[0].innerHTML = number;
 }
+
+// var saveThings = function () {
+// 	// // alert('linxi')
+// 	// alert("我要刷新啊")
+// 	ChangeSave();
+// }
+
+
+// window.onbeforeunload=function (){
+// alert("===onbeforeunload===");
+// if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey){
+//      alert("你关闭了浏览器");
+// }else{
+//      alert("你正在刷新页面");
+// }
+// }
+
+
+// EventUtil.addHandler(document,"beforeunload",saveThings);
+// EventUtil.addHandler(document,"DOMSubtreeModified",saveThings);

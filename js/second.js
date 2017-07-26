@@ -39,14 +39,36 @@ function getLocalStorage() {
 }
 var storage = getLocalStorage();
 
-
 var SignInClick = function() {
-
-	var username = document.getElementById("usernameId").value;
-	var password = document.getElementById("passwordId").value;
+	 username = document.getElementById("usernameId").value;
+	 password = document.getElementById("passwordId").value;
+	 // username = document.getElementById("usernameId").value;
+	 // password = document.getElementById("passwordId").value;
 	if(storage.getItem(username)){
 			if(storage.getItem(username) == password){
 			alert("成功登陆");
+			var All = document.getElementById("allThings")
+			document.getElementById("TodosMainId").className = "main";
+			document.getElementById("menu").className = null;
+			document.getElementById("loginMainId").className = "loginTop divnone";
+			document.getElementById("mainId").className = "loginMain divnone";
+			document.getElementById("CreatId").className = "Creat divnone";
+
+
+			if(username) {
+			         $.ajax({
+                     type: 'get',
+                     url: 'http://localhost:3000/people/' + username,
+                     dataType: "json",
+                     success: function(data) {
+                     if(data.things) {
+                     All.innerHTML = data.things;
+                        }
+                     }
+             });
+			}
+
+			key();
 		}else {
 			alert("密码错误")
 		}
@@ -55,6 +77,7 @@ var SignInClick = function() {
 			alert("该用户不存在")
 	}
 }
+
 var theUlr = "http://localhost:3000";
 //创建账号
 var CreatClick = function() {
@@ -65,46 +88,84 @@ var CreatClick = function() {
 	document.getElementById("mainId").style.height = "410px";
 	document.getElementById("signInId").className = "signIn divnone"
 	document.getElementById("RegisterId").className = "Register";
-
-$(document).ready(function(){
-	$.ajax({
-		ulr:"http://localhost:3000",
-		dataType:"jsonp", 
-		type:"put",
-		date:"22",
-		success:function(data){ 
-         alert("haha");
-        }
-	})
-
-});
-	// $.ajax({
-	// 	ulr:theUlr,
-	// 	type:"put",
-	// 	date:{
-	// 		"linzifan":"linzifan"
-	// 	}
-	// })
 }
 
 
 var RegisterClick = function() {
-	var storage = getLocalStorage();
-	var name = document.getElementById("usernameId").value;
-	var password = document.getElementById("passwordId").value;
+    var storage = getLocalStorage();
+ //    var name = document.getElementById("usernameId").value;
+	// var password = document.getElementById("passwordId").value;
 	// var question = document.getElementById("QuestionId").value;
 	// var answer = document.getElementById("AnswerId").value;
-	storage.setItem(name,password);
+	storage.setItem(username,password);
 	document.getElementById("SecurityId").className = "Security divnone";
 	document.getElementById("CreatId").className = "Creat";
 	document.getElementById("mainId").style.height = "250px";
 	document.getElementById("RegisterId").className = "Register divnone"
 	document.getElementById("signInId") .className = "signIn";
+	alert("已经成功注册！")
+	save();
 }
 
 
+// 保存缓存
+var save = function() {
+	// var name = document.getElementById("usernameId").value;
+	// var password = document.getElementById("passwordId").value;
+	// alert(name);
+	         $.ajax({
+                 type: 'post',
+                 url: 'http://localhost:3000/people',
+                 dataType: "json",
+                 data: {
+                     "name":username ,
+                     "password":password,
+                     "id": username
+                 }
+             }
+             );
+}
+// name
 
+//动态数据保存
+var ChangeSave = function() {
+	var allThings = document.getElementById("allThings").innerHTML;
+		         $.ajax({
+                 type: 'put',
+                 url: 'http://localhost:3000/people/'+username,
+                 dataType: "json",
+                 data: {
+                 	 "name":username,
+                     "password":password,
+                     "things":allThings
+                 }
+             }
+             );
+}
 
+//得到缓存
+var get = function() {
+	// alert("get")
+	// var name = document.getElementById("usernameId").value;
+	// var password = document.getElementById("passwordId").value;
+	var All = document.getElementById("allThings")
+           $.ajax({
+                   type: 'get',
+                   url: 'http://localhost:3000/people/' + username,
+                   dataType: "json",
+                   success: function(data) {
+                        if(data.things) {
+                        	alert(data.username);
+                            All.innerHTML = data.things;
+                         }
+                    }
+            });
+
+}
+
+// window.onload = function() {
+// 	get();
+// }
 
 var SignInbutton = document.getElementById('signInId');
 EventUtil.addHandler(SignInbutton,"click",SignInClick);
@@ -113,5 +174,5 @@ var CreatButton = document.getElementById("CreatAccount");
 EventUtil.addHandler(CreatButton,"click",CreatClick);
 
 var RegisterButton = document.getElementById("RegisterId");
-EventUtil.addHandler(RegisterButton,"click",RegisterClick)
+EventUtil.addHandler(RegisterButton,"click",RegisterClick);
 
