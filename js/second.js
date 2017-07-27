@@ -53,7 +53,8 @@ var SignInClick = function() {
 			document.getElementById("loginMainId").className = "loginTop divnone";
 			document.getElementById("mainId").className = "loginMain divnone";
 			document.getElementById("CreatId").className = "Creat divnone";
-
+			name = username;
+			passWord = password;
 
 			if(username) {
 			         $.ajax({
@@ -62,10 +63,10 @@ var SignInClick = function() {
                      dataType: "json",
                      success: function(data) {
                      if(data.things) {
-                     All.innerHTML = data.things;
+                     All.innerHTML = data.things
                         }
                      }
-             });
+                  });
 			}
 
 			key();
@@ -88,13 +89,17 @@ var CreatClick = function() {
 	document.getElementById("mainId").style.height = "410px";
 	document.getElementById("signInId").className = "signIn divnone"
 	document.getElementById("RegisterId").className = "Register";
+	
+	  $(document).ready(function() {
+	$("#Item").addClass("animated hinge");
+})
 }
 
 
 var RegisterClick = function() {
     var storage = getLocalStorage();
- //    var name = document.getElementById("usernameId").value;
-	// var password = document.getElementById("passwordId").value;
+	 var username = document.getElementById("usernameId").value;
+	 var password = document.getElementById("passwordId").value;
 	// var question = document.getElementById("QuestionId").value;
 	// var answer = document.getElementById("AnswerId").value;
 	storage.setItem(username,password);
@@ -103,6 +108,8 @@ var RegisterClick = function() {
 	document.getElementById("mainId").style.height = "250px";
 	document.getElementById("RegisterId").className = "Register divnone"
 	document.getElementById("signInId") .className = "signIn";
+	savename = username;
+	savepassWord = password;
 	alert("已经成功注册！")
 	save();
 }
@@ -118,9 +125,9 @@ var save = function() {
                  url: 'http://localhost:3000/people',
                  dataType: "json",
                  data: {
-                     "name":username ,
-                     "password":password,
-                     "id": username
+                     "name":savename,
+                     "password":savepassWord,
+                     "id": savename
                  }
              }
              );
@@ -129,14 +136,15 @@ var save = function() {
 
 //动态数据保存
 var ChangeSave = function() {
+	passWord = localStorage.getItem(name);
 	var allThings = document.getElementById("allThings").innerHTML;
 		         $.ajax({
                  type: 'put',
-                 url: 'http://localhost:3000/people/'+username,
+                 url: 'http://localhost:3000/people/'+name,
                  dataType: "json",
                  data: {
-                 	 "name":username,
-                     "password":password,
+                 	 "name":name,
+                     "password":passWord,
                      "things":allThings
                  }
              }
@@ -148,14 +156,14 @@ var get = function() {
 	// alert("get")
 	// var name = document.getElementById("usernameId").value;
 	// var password = document.getElementById("passwordId").value;
+	// var allThings = document.getElementById("allThings").innerHTML;
 	var All = document.getElementById("allThings")
            $.ajax({
                    type: 'get',
-                   url: 'http://localhost:3000/people/' + username,
+                   url: 'http://localhost:3000/people/' + name,
                    dataType: "json",
                    success: function(data) {
                         if(data.things) {
-                        	alert(data.username);
                             All.innerHTML = data.things;
                          }
                     }
@@ -163,9 +171,25 @@ var get = function() {
 
 }
 
-// window.onload = function() {
-// 	get();
-// }
+window.onload = function() {
+var All = document.getElementById("allThings");
+// SignInClick();
+	if (name) {
+           $.ajax({
+                   type: 'get',
+                   url: 'http://localhost:3000/people/' + name,
+                   dataType: "json",
+                   success: function(data) {
+                        if(data.things) {
+                            All.innerHTML = data.things;
+                            menuFunction()
+                            key();
+                         }
+                    }
+            });
+	}
+
+}
 
 var SignInbutton = document.getElementById('signInId');
 EventUtil.addHandler(SignInbutton,"click",SignInClick);

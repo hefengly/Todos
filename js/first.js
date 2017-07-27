@@ -101,12 +101,13 @@ if(target.className == "childText") {
 	if(event.keyCode == 13) {
 
 //删除修改后空格的节点
-	if(target.id != "text") {
+	// if(target.id != "text") {
+		var menu = document.getElementById("menu");
 			if(target.innerHTML == "") {
 		menu.removeChild(target.parentNode);
 		numbertest();
 	}
-	}
+	// }
 
 
 
@@ -131,7 +132,6 @@ EventUtil.addHandler(document,"keypress",handler);
 var menu = document.getElementById("menu");
 
 
-
 var menuFunction = function() {
 	var event = EventUtil.getEvent(event);
 	var target = EventUtil.getTarget();
@@ -141,8 +141,6 @@ var menuFunction = function() {
 	if(className == "removeButton") {
 		var menu = document.getElementById("menu");
 		document.getElementById("lastliID").className = "clearCompleted divnone";
-	   // var ifbottom = document.getElementById("bottomid");
-	   // alert(target.parentNode.className)
 	   menu.removeChild(target.parentNode);
 
         //计数器
@@ -421,15 +419,23 @@ numbertest();
 
 
 	 if(target.id != "onContenteditable") {
+
 	 	if(document.getElementById("onContenteditable")) {
 
 	 		var onContenteditable = document.getElementById("onContenteditable");
 	 		onContenteditable.id = null;
 	 		onContenteditable.setAttribute("contenteditable","false");
+
+	 		//删除修改后空格的节点
+	 		if(onContenteditable.innerHTML == "") {
+		    var menu = document.getElementById("menu");
+		   menu.removeChild(onContenteditable.parentNode);
+		   numbertest();
+	}	
 	 	}
-	 }
 
-
+	 	//删除修改后空格的节点
+}
 //优先级按钮
 	if(className == "mainImg beforeClick") {
 		var menu = document.getElementById("menu");
